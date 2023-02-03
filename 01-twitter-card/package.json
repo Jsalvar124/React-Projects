@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://jsalvar124.github.io/React-Projects/01-twitter-card/"
+  "homepage": "https://jsalvar124.github.io/React-Projects/01-twitter-card/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
