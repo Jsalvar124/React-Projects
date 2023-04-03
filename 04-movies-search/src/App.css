@@ -1,0 +1,40 @@
+.page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.movies{
+    list-style: none;
+    margin:0;
+    padding: 0;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.movie h3, .movie p{
+    margin-top:10px;
+    padding: 0;
+    text-align: center;
+}
+.movie img{
+    text-align: center;
+    border-radius: 8px;
+}

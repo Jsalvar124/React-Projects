@@ -1,0 +1,171 @@
+un framework de "Classless" css
+
+Water
+Bolt
+
+Dan estilos, para que se vea más o menos bien, sin ocuparse demasiado de el css
+
+el useRef, persiste entre renderizados, a diferencia del useState.
+el uso más tipico, es para guardar una referencia del DOM
+-----------------------------------------------------------------------------
+import { useRef } from 'react'
+import { Movies } from './components/Movies'
+import { useMovies } from './hooks/useMovies.js'
+
+function App () {
+  const { movies } = useMovies()
+  const inputRef = useRef()
+
+  // manipulating DOM objects using useRef
+  const handleClick = (e) => {
+    e.preventDefault()
+    const inputValue = inputRef.current.value
+    console.log(inputValue)
+  }
+  return (
+    <>
+      <header>
+        <h1>Buscador de películas</h1>
+        <form action=''>
+          <input ref={inputRef} type='text' placeholder='Avengers, Her, Up...' />
+          <button onClick={handleClick} type='submit'>Buscar</button>
+        </form>
+      </header>
+      <main>
+        <Movies movies={movies} />
+      </main>
+    </>
+  )
+}
+
+export default App
+--------------------------------------------------------------------
+
+para input y button usar formularios.
+
+mejor que un handle click, como estamos dentro de un form, funciona mejor un handle submit.
+
+NO SE DEBE ABUSAR DEL USE REF, HAY MEJORES FORMAS DE MANIPULAR EL DOM
+
+hay una forma más sencilla, de recuperar los values de los inputs, sin necesidad de usar hooks.
+
+import { useRef } from 'react'
+import { Movies } from './components/Movies'
+import { useMovies } from './hooks/useMovies.js'
+
+function App () {
+  const { movies } = useMovies()
+
+  // manipulating DOM objects using useRef
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const fields = new FormData(e.target)
+    const inputValue = fields.get('query')
+    const inputValue1 = fields.get('query1')
+    const inputValue2 = fields.get('query2')
+    console.log(inputValue, inputValue1, inputValue2)
+  }
+  return (
+    <>
+      <header>
+        <h1>Buscador de películas</h1>
+        <form action='' onSubmit={handleSubmit}>
+          <input name='query' type='text' placeholder='Avengers, Her, Up...' />
+          <input name='query1' type='text' placeholder='Avengers, Her, Up...' />
+          <input name='query2' type='text' placeholder='Avengers, Her, Up...' />
+          <button type='submit'>Buscar</button>
+        </form>
+      </header>
+      <main>
+        <Movies movies={movies} />
+      </main>
+    </>
+  )
+}
+
+export default App
+
+-----------------------------------
+variación para manipularlos todos en un solo objeto
+
+const handleSubmit = (e) => {
+    e.preventDefault()
+    const fields = Object.fromEntries(new window.FormData(e.target))
+    console.log(fields)
+  }
+
+//{query: 'bob', query1: 'tom', query2: 'roger'}
+
+Esto es una forma NO CONTROLADA de manejar un formulario
+
+Grid CLAVE para la vida.
+
+const handleChange = (event) => {
+    const newQuery = event.target.value // new query, porque query es una función asíncrona entonces, se puede quedar.
+    if (newQuery.startsWith(' ')) return // evita que el query comience con espacio.
+    setQuery(newQuery)
+    console.log(newQuery)
+
+    if (newQuery === '') {
+      setError('No se ingresó ninguna película')
+      return
+    }
+    setError(null)
+  }
+
+
+GRID RESPONSIVE
+------------------------------------------------
+.page{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+form{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.movies{
+    list-style: none;
+    margin:0;
+    padding: 0;
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+
+USE REF
+
+export function useMovies ({ query }) {
+  const [movies, setMoviesResults] = useState([])
+  const previousSearch = useRef(query) // using useRef to avoid the same search.
+
+  const getMovies = () => {
+    if (query === previousSearch.current) return // si el query es el msimo anterior, pues no hace nada
+    if (query) {
+      previousSearch.current = query
+      fetch(`https://www.omdbapi.com/?s=${query}&apikey=9469a74b`)
+        .then(res => res.json())
+        .then(json => {
+          console.log(json)
+          setMoviesResults(json.Search)
+          // setMoviesResults(withResults.Search)
+        })
+    } else {
+      setMoviesResults(noResults.Search)
+    }
+  }
