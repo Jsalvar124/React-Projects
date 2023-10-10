@@ -1,32 +1,21 @@
-import { useState } from 'react'
 import './App.css'
 import { Products } from './components/Products.jsx'
-import { products as initialProducts } from './mocks/products.json'
 import { Header } from './components/Header.jsx'
+import { Footer } from './components/Footer'
+// import { useFilters } from './hooks/useFilters.jsx'
 
 function App() {
 
-  const [products] = useState(initialProducts)
-  const [filters, setFilters] = useState({
-    category: 'all',
-    minPrice: 0
-  })
-
-  const filteredProducts = products.filter(product =>{
-    return (
-      product.price >= filters.minPrice &&
-      (
-        filters.category === 'all' ||
-        filters.category === product.category
-      ))
-  })
+  // se saca la lógica por fuera del componente, y se reduce a una función como una "caja negra", los custom hooks siempre deben empezar por use___
+  // const {filters} = useFilters()
 
   return (
     // setFilters prop drilling debe llegar al componente filters. App -> Headers -> Filters, por qué? puesto que el filtro inicial
     // el estado inicial de filters, se necesita para renderizar los productos.
     <>
-      <Header setFilters={setFilters}/> 
-      <Products products={filteredProducts} />
+      <Header /> 
+      <Products />
+      <Footer />
     </>
   )
 }
