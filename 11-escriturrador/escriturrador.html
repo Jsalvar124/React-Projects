@@ -1,0 +1,2409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escriturrador</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+</head>
+
+<body>
+    <div id="quoteContainer"></div>
+    <!-- <div class="card">
+        <div class="container">
+            <p class="initial">A<p/>
+            <p class="quote">sí es, uno no patea la lonchera, pero a veces toca mandar la lonchera pa la</p>
+        </div>
+        <p class="excess">puta mierda y
+            conseguir una lonchera nueva.</p>
+
+        <div class="author-context">
+            <h2 class="author">Rulos</h2>
+            <p class="context">Sobre el empleo y la explotación laboral.</p>
+        </div>
+        
+    </div> -->
+</body>
+<script>
+
+    const escriturrasObj = {
+  "data": [
+  {
+      "id": 1,
+      "quote": "El bareto de hoy... es la pata del mañana.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 1,
+      "author": {
+        "id": 1,
+        "author": "Nicholls",
+        "full_name": "Andrés Nicholls"
+      }
+    },
+    {
+      "id": 2,
+      "quote": "Men es mejor tomar en más días de la semana pero menos trago, eso lo hace a uno más alcohólico pero menos turro.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 3,
+      "quote": "la vida es como una hormiga culona: empieza chimba, luego tiene un amarguito ahí todo gonorrea y hay que pasarla con pola.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 4,
+      "quote": "si hay algo seguro en esta vida es que Marcucci no va a venir.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 4,
+      "author": {
+        "id": 4,
+        "author": "LMB",
+        "full_name": "Los Más Borrachos"
+      }
+    },
+    {
+      "id": 5,
+      "quote": "Lo peor es lavarse los dientes con la nariz tapada: uno se ahoga!",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 6,
+      "quote": "men en el trabajo eso ya después de almuerzo es trámite.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 7,
+      "quote": "men ese perro qué marca es?",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 8,
+      "quote": "no te puede parar la policía si siempre estás parado.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 9,
+      "quote": "primero nos tomamos dos fondos blancos y luego un fondo y así nos vamos yendo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 10,
+      "quote": "men la turra no discrimina ni días ni razas ni géneros.",
+      "quote_ans": null,
+      "context": "después de metérsela un martes.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 11,
+      "quote": "La vejez significa turriar más días, no menos.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 12,
+      "quote": "men el aburrimiento es peor que el guayabo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 13,
+      "quote": "Men que se choque con un carrito de redbull y que empiece a llover jagerbombs. Me desnudo y empiezo a bailar bajo la lluvia.",
+      "quote_ans": null,
+      "context": "después de ver un camión de Jagger.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 14,
+      "quote": "Uno está sobrio o está turro, pero nunca pivoteando.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 15,
+      "quote": "La diferencia entre un fondo blanco y un fondo es que un fondo blanco es el reto, mientras que un fondo es más personal, algo interno.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 16,
+      "quote": "Siempre es mejor no cagarla que cagarla.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 17,
+      "quote": "Madrugar es un gran logro en la vida pero madrugar a beber es una chimba.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 6,
+      "author": {
+        "id": 6,
+        "author": "Escobar",
+        "full_name": "Camilo Escobar"
+      }
+    },
+    {
+      "id": 18,
+      "quote": "El dado es sabio.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 4,
+      "author": {
+        "id": 4,
+        "author": "LMB",
+        "full_name": "Los Más Borrachos"
+      }
+    },
+    {
+      "id": 19,
+      "quote": "Donde no puedas beber, no te demores.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 20,
+      "quote": "Men, Anita dura más debajo del agua que tomando.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 21,
+      "quote": "Qué es la vida sin el trago sino un eterno vórtice de infelicidad.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 22,
+      "quote": "curiosamente, el no mezclar, aplica pal 88.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 23,
+      "quote": "Uno no sabe lo que tiene hasta que lo prueba.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 24,
+      "quote": "El mundo es un destapador.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 7,
+      "author": {
+        "id": 7,
+        "author": "Wolff",
+        "full_name": "Pablo Wolff"
+      }
+    },
+    {
+      "id": 25,
+      "quote": "No sólo eso, el mundo es una pipa.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 8,
+      "author": {
+        "id": 8,
+        "author": "Anita",
+        "full_name": "Ana María Franco"
+      }
+    },
+    {
+      "id": 26,
+      "quote": "Si vale lo mismo da el mismo guayabo.",
+      "quote_ans": null,
+      "context": "sobre el donde Chepe y el 88.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 9,
+      "author": {
+        "id": 9,
+        "author": "Tabares",
+        "full_name": "Juan Manuel Tabares"
+      }
+    },
+    {
+      "id": 27,
+      "quote": "marica yo le hago al pequeño Obama, sólo de pana pero yo le hago.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 10,
+      "author": {
+        "id": 10,
+        "author": "Marcucci",
+        "full_name": "Juan David Marcucci"
+      }
+    },
+    {
+      "id": 28,
+      "quote": "Es más fácil poner a comer a una flaca que poner a correr a una gorda.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 29,
+      "quote": "Una cagada de una cagada es un acierto.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 30,
+      "quote": "Chucho se chupó a Paulina.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 31,
+      "quote": "El universo es como el dado, sabio hasta la chimba.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 32,
+      "quote": "yo no voy a misa los domingos, yo voy a Chepe los jueves.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 33,
+      "quote": "Folla uno, folla el equipo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 11,
+      "author": {
+        "id": 11,
+        "author": "Cataño",
+        "full_name": "Santiago Cataño"
+      }
+    },
+    {
+      "id": 34,
+      "quote": "TipsyBarternder es como un art attack para borrachos.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 7,
+      "author": {
+        "id": 7,
+        "author": "Wolff",
+        "full_name": "Pablo Wolff"
+      }
+    },
+    {
+      "id": 35,
+      "quote": "Cuando estoy borracho, no me miro en el espejo del baño para no llegar a juzgarme.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 11,
+      "author": {
+        "id": 11,
+        "author": "Cataño",
+        "full_name": "Santiago Cataño"
+      }
+    },
+    {
+      "id": 36,
+      "quote": "Men tenemos un trago que sobró, un dado y un ping pong... vamos a tomar malas decisiones.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 37,
+      "quote": "Men el quesito es una ilusión.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 38,
+      "quote": "Toma uno toma el equipo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 39,
+      "quote": "Al jet lag se lo vence turriando.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 40,
+      "quote": "El Chachín está hecho de esa magia de la que hablaban en ese rock en español noventero.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 12,
+      "author": {
+        "id": 12,
+        "author": "Pedro",
+        "full_name": null
+      }
+    },
+    {
+      "id": 41,
+      "quote": "Yo a esa vieja le doy cría y hasta le pago la cuota alimentaria.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 9,
+      "author": {
+        "id": 9,
+        "author": "Tabares",
+        "full_name": "Juan Manuel Tabares"
+      }
+    },
+    {
+      "id": 42,
+      "quote": "No he pensado en eso, la verdad lo que me motiva es la venganza.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 13,
+      "author": {
+        "id": 13,
+        "author": "Yuly",
+        "full_name": "Yuly Rojas"
+      }
+    },
+    {
+      "id": 43,
+      "quote": "lo más ecualitativo es...",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 44,
+      "quote": "la pizza hawaiana no es pizza, eso es un panzerotti abierto.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 45,
+      "quote": "Perro yo estoy Melanie pero no estoy Jenifer.",
+      "quote_ans": null,
+      "context": "después de comerse un perro pequeño.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 14,
+      "author": {
+        "id": 14,
+        "author": "Alejo",
+        "full_name": null
+      }
+    },
+    {
+      "id": 46,
+      "quote": "Men un cuarto de siglo, ya se acabó esta mondá.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 47,
+      "quote": "La sequía se acabó! o comenzó nuevamente; depende del punto de vista.",
+      "quote_ans": null,
+      "context": "después de encontrar oro en su búsqueda de cobre.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 9,
+      "author": {
+        "id": 9,
+        "author": "Tabares",
+        "full_name": "Juan Manuel Tabares"
+      }
+    },
+    {
+      "id": 48,
+      "quote": "Parce, es que tomar con el vaso del chucho es como tener un hijo bastardo, uno lo quiere pero hay algo que no... pero le voy a cambiar el nombre, le voy a dar mi apellido.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 7,
+      "author": {
+        "id": 7,
+        "author": "Wolff",
+        "full_name": "Pablo Wolff"
+      }
+    },
+    {
+      "id": 49,
+      "quote": "Parce, deberíamos montar una oficina. El loco y Wolff son los ingenieros, yo soy el abogado y Llano nos compone la música del ascensor.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 9,
+      "author": {
+        "id": 9,
+        "author": "Tabares",
+        "full_name": "Juan Manuel Tabares"
+      }
+    },
+    {
+      "id": 50,
+      "quote": "Uno se quiere medio arrancar una güeva y prenderla a ver si calienta un poquito.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 15,
+      "author": {
+        "id": 15,
+        "author": "Chepin",
+        "full_name": "Juan Camilo Yepez"
+      }
+    },
+    {
+      "id": 51,
+      "quote": "men el porno furry es como la forma del agua pero con gatos, perros, zorros, ardillas, etc...",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 52,
+      "quote": "si estás pensando en quedarte con una mujer, mira a tu suegra, porque así va a ser cuando estes cucho.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 16,
+      "author": {
+        "id": 16,
+        "author": "Luis Nuñez",
+        "full_name": "Luis Nuñez"
+      }
+    },
+    {
+      "id": 53,
+      "quote": "El hecho de que no estés en la lista, no significa que no estés en la lista.",
+      "quote_ans": null,
+      "context": "hablando sobre la subjetividad de lo que le dicen las pollas a uno.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 17,
+      "author": {
+        "id": 17,
+        "author": "Juanma",
+        "full_name": "Juan Manuel Montoya"
+      }
+    },
+    {
+      "id": 54,
+      "quote": "Proporción aureola.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 18,
+      "author": {
+        "id": 18,
+        "author": "Aleja Perras",
+        "full_name": "Aleja Perras"
+      }
+    },
+    {
+      "id": 55,
+      "quote": "El amor es eterno, hasta que se acaba.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 16,
+      "author": {
+        "id": 16,
+        "author": "Luis Nuñez",
+        "full_name": "Luis Nuñez"
+      }
+    },
+    {
+      "id": 56,
+      "quote": "Que le den. Ellas también jugaron Age of Empires!",
+      "quote_ans": null,
+      "context": "turro, sin ningúna razón aparente.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 57,
+      "quote": "Yo no le robo a la gente, yo le robo a la DIAN.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 19,
+      "author": {
+        "id": 19,
+        "author": "Gino",
+        "full_name": "Gino D'Paola"
+      }
+    },
+    {
+      "id": 58,
+      "quote": "Las japonesas chimbas, entiendo que son chimbas.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 59,
+      "quote": "parce, la gente que no toma no tiene espíritu.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 13,
+      "author": {
+        "id": 13,
+        "author": "Yuly",
+        "full_name": "Yuly Rojas"
+      }
+    },
+    {
+      "id": 60,
+      "quote": "men el loco es como el puto Snorlax cuando usa la habilidad que lo pone a dormir y lo cura.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 7,
+      "author": {
+        "id": 7,
+        "author": "Wolff",
+        "full_name": "Pablo Wolff"
+      }
+    },
+    {
+      "id": 61,
+      "quote": "A nada diga que no.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 20,
+      "author": {
+        "id": 20,
+        "author": "La abuela de Mar",
+        "full_name": null
+      }
+    },
+    {
+      "id": 62,
+      "quote": "Yo tengo el sabor en la sangre, pero tengo mala circulación en las piernas.",
+      "quote_ans": null,
+      "context": "sobre los estereotipos de las personas de piel oscura y el baile.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 21,
+      "author": {
+        "id": 21,
+        "author": "John Jalen",
+        "full_name": "John Jarlen Quiroz"
+      }
+    },
+    {
+      "id": 63,
+      "quote": "yo no sería capaz de salir con alguien que no fuera alcohólico.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 13,
+      "author": {
+        "id": 13,
+        "author": "Yuly",
+        "full_name": "Yuly Rojas"
+      }
+    },
+    {
+      "id": 64,
+      "quote": "Yo no la odio pero si la veo ahogándose con un super coco, la dejo morir.",
+      "quote_ans": null,
+      "context": "hablando de Marcela.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 65,
+      "quote": "si usté sabe manejar, en Bogotá se le olvida.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 1,
+      "author": {
+        "id": 1,
+        "author": "Nicholls",
+        "full_name": "Andrés Nicholls"
+      }
+    },
+    {
+      "id": 66,
+      "quote": "no se trata de evitar ser alcohólico, se trata de saber manejar el alcoholismo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 67,
+      "quote": "Dios cuida a los locos y a los borrachos y el loco, que es un borracho, tiene doble bonus point de cuidado.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 68,
+      "quote": "La sangre sólo sirve pa' hacer morcilla.",
+      "quote_ans": null,
+      "context": "sobre el empleo familiar.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 19,
+      "author": {
+        "id": 19,
+        "author": "Gino",
+        "full_name": "Gino D'Paola"
+      }
+    },
+    {
+      "id": 69,
+      "quote": "Parce, acabo de ir donde una propietaria a atender un daño que tiene en el apto y casi me viola, literal me atendió cual pelicula porno, en babydoll y toda tocona. Lástima que era una gorda feita.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 22,
+      "author": {
+        "id": 22,
+        "author": "Rulos",
+        "full_name": "David Jaramillo"
+      }
+    },
+    {
+      "id": 70,
+      "quote": "Cuando tabares esté borracho hay que pegarle con ramas de cilantro.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 71,
+      "quote": "Si después del tercer litro la cosa no escala, muere.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 72,
+      "quote": "Si yo fuera vegetariano comería chorizo, eso no es carne.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 22,
+      "author": {
+        "id": 22,
+        "author": "Rulos",
+        "full_name": "David Jaramillo"
+      }
+    },
+    {
+      "id": 73,
+      "quote": "Salvemos el hiijueputa amazonas, dejamos de comer carnes rojas dos meses y al tercer mes matamos 4 reses en un asado.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 23,
+      "author": {
+        "id": 23,
+        "author": "Juan David Arango",
+        "full_name": "Juan David Arango"
+      }
+    },
+    {
+      "id": 74,
+      "quote": "Men móntela a caballito pa que no le duela la rodilla.",
+      "quote_ans": "No, ese man está muy bajito, eso más bien es como llévela a pony.",
+      "context": "hablando sobre Urrego y la novia.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 9,
+      "author": {
+        "id": 9,
+        "author": "Tabares",
+        "full_name": "Juan Manuel Tabares"
+      }
+    },
+    {
+      "id": 75,
+      "quote": "Men te quiero mucho, sos la verga pero estás peluda.",
+      "quote_ans": null,
+      "context": "sobre un man que no esté organizado.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 24,
+      "author": {
+        "id": 24,
+        "author": "Anónimo",
+        "full_name": null
+      }
+    },
+    {
+      "id": 76,
+      "quote": "A mí es que nunca me han gustado los vicios secos.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 25,
+      "author": {
+        "id": 25,
+        "author": "El papá de Wolff",
+        "full_name": null
+      }
+    },
+    {
+      "id": 77,
+      "quote": "A Meli lo que le gusta es el huevo al pipimentón.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 26,
+      "author": {
+        "id": 26,
+        "author": "Reyes",
+        "full_name": "Camilo Reyes"
+      }
+    },
+    {
+      "id": 78,
+      "quote": "Pa' perriar no se necesitan hombres.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 27,
+      "author": {
+        "id": 27,
+        "author": "Manu",
+        "full_name": null
+      }
+    },
+    {
+      "id": 79,
+      "quote": "Uno no patea la lonchera, pero a veces toca mandar la lonchera pa la puta mierda y conseguir una lonchera nueva.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 22,
+      "author": {
+        "id": 22,
+        "author": "Rulos",
+        "full_name": "David Jaramillo"
+      }
+    },
+    {
+      "id": 80,
+      "quote": "La mala decisión está a medio litro de distancia.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 7,
+      "author": {
+        "id": 7,
+        "author": "Wolff",
+        "full_name": "Pablo Wolff"
+      }
+    },
+    {
+      "id": 81,
+      "quote": "Papi, es que el que no las pide las oye poner.",
+      "quote_ans": null,
+      "context": "primera turra post cuarentena.",
+      "place": null,
+      "date": "2020-06-14",
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 82,
+      "quote": "No importa si estás en Dinamarca o en Cundinamarca, los taxitas son una gonorrea.",
+      "quote_ans": null,
+      "context": "después de que un taxista lo atropelló en la cicla y se voló.",
+      "place": "Noruega",
+      "date": null,
+      "published": 1,
+      "author_id": 19,
+      "author": {
+        "id": 19,
+        "author": "Gino",
+        "full_name": "Gino D'Paola"
+      }
+    },
+    {
+      "id": 83,
+      "quote": "jaja, men si parece estúpido pero funciona, no es estúpido.",
+      "quote_ans": null,
+      "context": "sobre usar la tabla del 7 para no venirse.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 84,
+      "quote": "Men, todo lo que no sea Tinder está por debajo: En Badoo fue donde el chucho conoció a la proxeneta.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 85,
+      "quote": "Vamos a dormirnos... pero el tabiquee a barrio Antioquia!!",
+      "quote_ans": null,
+      "context": "chimbeando con sueño.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 11,
+      "author": {
+        "id": 11,
+        "author": "Cataño",
+        "full_name": "Santiago Cataño"
+      }
+    },
+    {
+      "id": 86,
+      "quote": "Marica, nos emborrachamos, hicimos un mini club de la pelea y me partí el dedo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 28,
+      "author": {
+        "id": 28,
+        "author": "Arracacho",
+        "full_name": null
+      }
+    },
+    {
+      "id": 87,
+      "quote": "men y la mona qué?",
+      "quote_ans": "ah men, cuando la mona se despecha se va al mar, cuando yo me despecho me voy a armar.",
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 1,
+      "author": {
+        "id": 1,
+        "author": "Nicholls",
+        "full_name": "Andrés Nicholls"
+      }
+    },
+    {
+      "id": 88,
+      "quote": "Marica, un huevo de avestruz es como una garrafa de huevo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 89,
+      "quote": "Yo nunca en la vida quiero dejar de ser alcohólico, y si te molesta, déjame ir.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 90,
+      "quote": "Yo sólo voy a comer tacos acá, y lo que no sea taco lo meto en un taco.",
+      "quote_ans": null,
+      "context": null,
+      "place": "Playa del carmen",
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 91,
+      "quote": "Papi, ¿a usted no le enseñaron en el colegio que uno no suman peras con manzanas?",
+      "quote_ans": "Claro, porque los cocos son más caros que los plátanos.",
+      "context": "desvariando sobre el rendimiento de las cosechas de plátano.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 29,
+      "author": {
+        "id": 29,
+        "author": "El Perez",
+        "full_name": "Camilo Pérez"
+      }
+    },
+    {
+      "id": 92,
+      "quote": "Si uno no tiene un tío alcohólico, es porque el papá de uno es el alcohólico.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 30,
+      "author": {
+        "id": 30,
+        "author": "Isa",
+        "full_name": "Isabel Arango"
+      }
+    },
+    {
+      "id": 93,
+      "quote": "Los drogadictos no existen, son simples pre-cristianos.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 94,
+      "quote": "Que rico ser almacén de centro para mostrártelo sin compromiso.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 19,
+      "author": {
+        "id": 19,
+        "author": "Gino",
+        "full_name": "Gino D'Paola"
+      }
+    },
+    {
+      "id": 95,
+      "quote": "A mi con cochinadas no, que me enamoro.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 31,
+      "author": {
+        "id": 31,
+        "author": "Gondy",
+        "full_name": "Laura Estrada"
+      }
+    },
+    {
+      "id": 96,
+      "quote": "Marica, pa que no tome trago, allá hay cerveza.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 97,
+      "quote": "Trabaja más un cucarrón boca arriba que el loco.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 32,
+      "author": {
+        "id": 32,
+        "author": "Mario",
+        "full_name": "Mario Hazbun"
+      }
+    },
+    {
+      "id": 98,
+      "quote": "Cuando yo estoy en la parranda no me acuerdo que me voy a morir.",
+      "quote_ans": null,
+      "context": "89 años, Cantadora y Curandera.",
+      "place": "Palenque",
+      "date": null,
+      "published": 1,
+      "author_id": 33,
+      "author": {
+        "id": 33,
+        "author": "Rosalina",
+        "full_name": null
+      }
+    },
+    {
+      "id": 99,
+      "quote": "Aquí amanecemos si no hay pelea.",
+      "quote_ans": null,
+      "context": "89 años, Cantadora y Curandera.",
+      "place": "Palenque",
+      "date": null,
+      "published": 0,
+      "author_id": 33,
+      "author": {
+        "id": 33,
+        "author": "Rosalina",
+        "full_name": null
+      }
+    },
+    {
+      "id": 100,
+      "quote": "yo no me muero hasta que no sea inmortal.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 34,
+      "author": {
+        "id": 34,
+        "author": "Fochelo",
+        "full_name": null
+      }
+    },
+    {
+      "id": 101,
+      "quote": "Qué? Con eso se traba todo el pabellón norte de la cárcel modelo.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 8,
+      "author": {
+        "id": 8,
+        "author": "Anita",
+        "full_name": "Ana María Franco"
+      }
+    },
+    {
+      "id": 102,
+      "quote": "Si usted no combina, no borra casette.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 35,
+      "author": {
+        "id": 35,
+        "author": "Cachetes",
+        "full_name": null
+      }
+    },
+    {
+      "id": 103,
+      "quote": "Si usted no es alcohólico es porque su papá era alcohólico.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 35,
+      "author": {
+        "id": 35,
+        "author": "Cachetes",
+        "full_name": null
+      }
+    },
+    {
+      "id": 104,
+      "quote": "Men, vení, ¿será que es que a mi no me gusta el trago?",
+      "quote_ans": null,
+      "context": "llevado y con una pola en la mano.",
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 36,
+      "author": {
+        "id": 36,
+        "author": "Apu",
+        "full_name": "Juan Esteban Hernandez"
+      }
+    },
+    {
+      "id": 105,
+      "quote": "La página de la registraduría está caida, me va a tocar mirar las listas impresas como todo un cavernícola.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 7,
+      "author": {
+        "id": 7,
+        "author": "Wolff",
+        "full_name": "Pablo Wolff"
+      }
+    },
+    {
+      "id": 106,
+      "quote": "Marica, ustedes si entienden que Llano se va a quedar en mi casa un mes?",
+      "quote_ans": "Me van a echar de mi casa en un mes.",
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 107,
+      "quote": "Camarón que se duerme, se le culean la hermana.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 108,
+      "quote": "Men, yo cada que tomo Vodquila me imagino al Kaiosama del norte gritando: ¡Pero Goku, si haces eso tu estadía en la tierra será más corta!",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 1,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 109,
+      "quote": "Ella es como un helicóptero: levanta polvo donde llega.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 8,
+      "author": {
+        "id": 8,
+        "author": "Anita",
+        "full_name": "Ana María Franco"
+      }
+    },
+    {
+      "id": 110,
+      "quote": "El problema de esa mujer es que le gusta más el pipí que la comida de sal.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 1,
+      "author": {
+        "id": 1,
+        "author": "Nicholls",
+        "full_name": "Andrés Nicholls"
+      }
+    },
+    {
+      "id": 111,
+      "quote": "Vos sos el amigo de las putas y yo de los callejeros, juntos seríamos Jesucristo.",
+      "quote_ans": null,
+      "context": null,
+      "place": "Calles de Hamburgo",
+      "date": null,
+      "published": 0,
+      "author_id": 36,
+      "author": {
+        "id": 36,
+        "author": "Apu",
+        "full_name": "Juan Esteban Hernandez"
+      }
+    },
+    {
+      "id": 112,
+      "quote": "Rotalo pues que eso no es un micrófono.",
+      "quote_ans": "Espérese que es que yo estoy aca en mi solo.",
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 37,
+      "author": {
+        "id": 37,
+        "author": "Goez",
+        "full_name": "Camilo Goez"
+      }
+    },
+    {
+      "id": 113,
+      "quote": "Gracias por tanto, perdón por tan poco.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 114,
+      "quote": "A usté qué le falta hacer en la vida hermano?",
+      "quote_ans": "Montar el globo y dar el culo.",
+      "context": null,
+      "place": "Viena",
+      "date": null,
+      "published": 0,
+      "author_id": 38,
+      "author": {
+        "id": 38,
+        "author": "El Indio",
+        "full_name": null
+      }
+    },
+    {
+      "id": 115,
+      "quote": "Los músicos son amigos, no comida.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 30,
+      "author": {
+        "id": 30,
+        "author": "Isa",
+        "full_name": "Isabel Arango"
+      }
+    },
+    {
+      "id": 116,
+      "quote": "Usted es la mayor estafa que ha producido la costa después del Junior de Barranquilla.",
+      "quote_ans": null,
+      "context": "diciendole al Blindpig.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 9,
+      "author": {
+        "id": 9,
+        "author": "Tabares",
+        "full_name": "Juan Manuel Tabares"
+      }
+    },
+    {
+      "id": 117,
+      "quote": "Las putas saben quien las preña.",
+      "quote_ans": null,
+      "context": "sobre las pruebas de paternidad.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 39,
+      "author": {
+        "id": 39,
+        "author": "La mamá de Gino",
+        "full_name": "La mamá de Gino"
+      }
+    },
+    {
+      "id": 118,
+      "quote": "La vida es triste.",
+      "quote_ans": "No, la vida es buena, la verdad es triste.",
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 40,
+      "author": {
+        "id": 40,
+        "author": "Samuel Bryan Farley",
+        "full_name": "Samuel Bryan Farley"
+      }
+    },
+    {
+      "id": 119,
+      "quote": "La certeza del desierto da mas estabilidad que la promesa del oasis.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 12,
+      "author": {
+        "id": 12,
+        "author": "Pedro",
+        "full_name": null
+      }
+    },
+    {
+      "id": 120,
+      "quote": "El que no reconoce la poesía, está condenado a repetirla.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 30,
+      "author": {
+        "id": 30,
+        "author": "Isa",
+        "full_name": "Isabel Arango"
+      }
+    },
+    {
+      "id": 121,
+      "quote": "Yo tengo un hermano que dice que las cervezas son como las tetas, una son poquitas, tres son muchas.",
+      "quote_ans": null,
+      "context": null,
+      "place": "Carmen de Vivoral",
+      "date": null,
+      "published": 0,
+      "author_id": 41,
+      "author": {
+        "id": 41,
+        "author": "Don Albeiro",
+        "full_name": null
+      }
+    },
+    {
+      "id": 122,
+      "quote": "Me llaman el mancillador de doncelleces.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 24,
+      "author": {
+        "id": 24,
+        "author": "Anónimo",
+        "full_name": null
+      }
+    },
+    {
+      "id": 123,
+      "quote": "Acaso no todos hemos sido un poco el loco? me pregunto.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 124,
+      "quote": "La gente tiene que entender que la turra es una maratón, no una carrera.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 7,
+      "author": {
+        "id": 7,
+        "author": "Wolff",
+        "full_name": "Pablo Wolff"
+      }
+    },
+    {
+      "id": 125,
+      "quote": "Eso es como emborracharse con torta de novia.",
+      "quote_ans": null,
+      "context": "refiriendose al Jagger.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 42,
+      "author": {
+        "id": 42,
+        "author": "Pablito",
+        "full_name": null
+      }
+    },
+    {
+      "id": 126,
+      "quote": "Que chimba fumar, que gonorrea ser fumador.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 127,
+      "quote": "Lo único malo de vivir en Viena es que no se puede ver dragon ball en cine.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 128,
+      "quote": "Las mejores canciones de los Beatles, son las que no parecen de los Beatles.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 129,
+      "quote": "Marica a mi me cuesta mucho abrir la boca, yo creo que por eso estoy soltera.",
+      "quote_ans": null,
+      "context": "comiendo perro.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 24,
+      "author": {
+        "id": 24,
+        "author": "Anónimo",
+        "full_name": null
+      }
+    },
+    {
+      "id": 130,
+      "quote": "Papi, aprenda pa' la vida, cuando los perro ladran, es porque algo está pasando.",
+      "quote_ans": null,
+      "context": "después de que al reyes y otros tantos les robaran las mochilas durante la noche.",
+      "place": "Playas de Tolú",
+      "date": null,
+      "published": 0,
+      "author_id": 43,
+      "author": {
+        "id": 43,
+        "author": "Doña Euralia",
+        "full_name": null
+      }
+    },
+    {
+      "id": 131,
+      "quote": "El que no sabe tomar que no tome.",
+      "quote_ans": null,
+      "context": "diciendole al Loco.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 36,
+      "author": {
+        "id": 36,
+        "author": "Apu",
+        "full_name": "Juan Esteban Hernandez"
+      }
+    },
+    {
+      "id": 132,
+      "quote": "Vivir es doler.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 44,
+      "author": {
+        "id": 44,
+        "author": "Bravo",
+        "full_name": "Daniel Bravo"
+      }
+    },
+    {
+      "id": 133,
+      "quote": "Dónde cash?",
+      "quote_ans": null,
+      "context": "periquero, a las 3 am.",
+      "place": "parque del poblado",
+      "date": null,
+      "published": 0,
+      "author_id": 45,
+      "author": {
+        "id": 45,
+        "author": "Un gringo",
+        "full_name": null
+      }
+    },
+    {
+      "id": 134,
+      "quote": "puedes sacar al corroncho del caribe pero nunca al caribe del corroncho.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 19,
+      "author": {
+        "id": 19,
+        "author": "Gino",
+        "full_name": "Gino D'Paola"
+      }
+    },
+    {
+      "id": 135,
+      "quote": "El Loco vive en calendario B.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 136,
+      "quote": "El se operó a los 26 años.",
+      "quote_ans": "Ah, la tiene clara, pa poder follar descalzo.",
+      "context": "sobre la vasectomía.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 11,
+      "author": {
+        "id": 11,
+        "author": "Cataño",
+        "full_name": "Santiago Cataño"
+      }
+    },
+    {
+      "id": 137,
+      "quote": "La vida es un eterno guayabo muy chimba.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 11,
+      "author": {
+        "id": 11,
+        "author": "Cataño",
+        "full_name": "Santiago Cataño"
+      }
+    },
+    {
+      "id": 138,
+      "quote": "Les informo que no voy a caminar ni media cuadra hoy, o piden taxi o me les empeloto aquí.",
+      "quote_ans": null,
+      "context": "transeunte al día siguiente del final del carnaval del diablo.",
+      "place": "Riosucio, Caldas",
+      "date": null,
+      "published": 0,
+      "author_id": 24,
+      "author": {
+        "id": 24,
+        "author": "Anónimo",
+        "full_name": null
+      }
+    },
+    {
+      "id": 139,
+      "quote": "Tabares siempre ha estado muerto; a veces por fuera, a veces por dentro.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 140,
+      "quote": "No sabe bueno pero envicia.",
+      "quote_ans": null,
+      "context": "sobre la soda de clitoria.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 31,
+      "author": {
+        "id": 31,
+        "author": "Gondy",
+        "full_name": "Laura Estrada"
+      }
+    },
+    {
+      "id": 141,
+      "quote": "Marica, yo sentí lo mismo que las gordas sintieron cuando Adele enflaqueció en el momento en que Marie Kondo renunció al orden.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 8,
+      "author": {
+        "id": 8,
+        "author": "Anita",
+        "full_name": "Ana María Franco"
+      }
+    },
+    {
+      "id": 142,
+      "quote": "Marica,te acabás de gastar una master ball en un puto magikarp.",
+      "quote_ans": null,
+      "context": "al enterarse de que concinaron unas lentejas en caldo de birria.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 144,
+      "quote": "En el bar podríamos vender el 44: la mitad del precio y el doble de calidad.",
+      "quote_ans": null,
+      "context": "sobre abrir un bar que reemplace a Maestre.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 5,
+      "author": {
+        "id": 5,
+        "author": "Llano",
+        "full_name": "Daniel Llano"
+      }
+    },
+    {
+      "id": 145,
+      "quote": "Malparidos argentinos.",
+      "quote_ans": null,
+      "context": "mientras tomaba un sorbo de fernet con choripan.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 146,
+      "quote": "pero es que los pañitos no vienen solos, uno primero barre y después trapea.",
+      "quote_ans": null,
+      "context": "sobre alternativas al uso del bidé.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 1,
+      "author": {
+        "id": 1,
+        "author": "Nicholls",
+        "full_name": "Andrés Nicholls"
+      }
+    },
+    {
+      "id": 147,
+      "quote": "No se me ahogue que esto no es una piscina.",
+      "quote_ans": null,
+      "context": "Después de que al loco se le devolviera un mezcal.",
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 3,
+      "author": {
+        "id": 3,
+        "author": "Chacho",
+        "full_name": "Julián Salvá"
+      }
+    },
+    {
+      "id": 148,
+      "quote": "El hecho de que sea una mala idea no hace que deje de ser una idea.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 2,
+      "author": {
+        "id": 2,
+        "author": "El Loco",
+        "full_name": "Daniel Cadavid"
+      }
+    },
+    {
+      "id": 149,
+      "quote": "Yo le voy a tirar el lance, a ver si en semana santa nos quedamos pegados.",
+      "quote_ans": null,
+      "context": null,
+      "place": null,
+      "date": null,
+      "published": 0,
+      "author_id": 11,
+      "author": {
+        "id": 11,
+        "author": "Cataño",
+        "full_name": "Santiago Cataño"
+      }
+    }
+  ],
+  "status": 200,
+  "total": 148
+}
+    
+    // function captureAndSaveAsJPG(htmlElement, outputFileName) {
+    //     // Use html2canvas to capture the HTML element
+    //     html2canvas(htmlElement, {
+    //         scale: 2 // Set the canvas width to increase resolution
+    //     }).then(canvas => {
+    //         // Convert the canvas to a data URL
+    //         const dataURL = canvas.toDataURL('image/png');
+
+    //         // Create a link element to download the image
+    //         const a = document.createElement('a');
+    //         a.href = dataURL;
+    //         a.download = outputFileName;
+
+    //         // Trigger a click event on the link to initiate the download
+    //         a.click();
+    //     });
+    // }
+    function captureAndSaveAsJPG(htmlElement, outputFileName) {
+        // Use DOM-to-Image to capture the HTML element
+        domtoimage.toJpeg(htmlElement, { quality: 1, scale: 2 })
+            .then(function (dataURL) {
+                // Create a link element to download the image
+                const a = document.createElement('a');
+                a.href = dataURL;
+                a.download = outputFileName;
+
+                // Trigger a click event on the link to initiate the download
+                a.click();
+            })
+            .catch(function (error) {
+                console.error('Error capturing and saving image:', error);
+            });
+    }
+
+    const darkColors = [
+        '#17365D',   // Darker Blue
+        '#1e2938',   // Darker Slate Gray
+        '#4F6228',   // Darker Green,
+        '#003300',  // trve Green
+        '#996600',   // Darker Yellow
+        '#b53a28',   // Darker Salmon
+        // '#c41a50',   // Darker Pink
+        '#31849B',   // Darker Light Blue
+        // '#CC3300',   // Darker Orange
+        '#660066',   // Darker Purple
+        '#13867f',   // Darker Cyan
+        '#800000',    // Darker Red
+        // '#DE8686',    // Pink
+        '#663300',     // Gold
+    ];
+
+    let previousColor = '';
+    function getRandomDarkColor() {
+        let randomColor;
+        // Keep generating a random color until it's different from the previous one
+        do {
+            randomColor = darkColors[Math.floor(Math.random() * darkColors.length)];
+        } while (randomColor === previousColor);
+        // Update the previousColor with the new color
+        previousColor = randomColor;
+        return randomColor;
+    }
+
+    function createEscriturraHTML(quoteData) {
+        const quoteContainer = document.getElementById('quoteContainer')
+        const quoteCard = document.createElement('div')
+        quoteCard.className = 'card'
+
+        // Create and populate the elements inside the card
+        const container = document.createElement('div')
+        container.className = 'container'
+        const initial = document.createElement('p')
+        initial.className = 'initial'
+        initial.textContent = quoteData.quote[0].toUpperCase()
+        // Set the randomly selected dark color for the quote text
+        const randomColor = getRandomDarkColor()
+        initial.style.color = randomColor// COLOR
+        const quote = document.createElement('p')
+        quote.className = 'quote'
+        let quoteStart = ''; // Define quoteStart here
+        let quoteEnd = '';   // Define quoteEnd here
+        if (quoteData.quote.slice(1).length < 58) {
+            quoteStart = quoteData.quote.slice(1)
+        } else {
+            const words = quoteData.quote.split(' ')
+            // console.log(words)
+            let wordCount = 0;
+            let index = 0;
+            while (wordCount < 58 && index < words.length - 1) {
+                // console.log(words[index])
+                wordCount += words[index].length + 1
+                // console.log(wordCount)
+                index += 1;
+                // console.log(index)
+            }
+            quoteStart = words.slice(0, index).join(' ')
+            quoteStart = quoteStart.slice(1);
+            quoteEnd = words.slice(index).join(' ')
+        }
+
+        quote.textContent = quoteStart
+        quote.style.color = randomColor; // COLOR
+        const excess = document.createElement('p')
+        excess.className = 'excess'
+        excess.textContent = quoteEnd ? quoteEnd : '';
+        excess.style.color = randomColor; // COLOR
+        container.appendChild(initial)
+        container.appendChild(quote)
+        quoteCard.appendChild(container)
+        quoteCard.appendChild(excess)
+
+        const authorContext = document.createElement('div')
+        authorContext.className = 'author-context'
+        const author = document.createElement('h2')
+        author.className = 'author'
+        author.textContent = quoteData.author.author
+        // author.textContent = quoteData.author.author + ` ${quoteData.id}`
+        const context = document.createElement('p')
+        context.className = 'context'
+        context.textContent = quoteData.context || ''
+        quoteData.place ? author.textContent += `, ${quoteData.place}` : ''
+        authorContext.appendChild(author)
+        authorContext.appendChild(context)
+        quoteCard.appendChild(authorContext)
+
+        quoteContainer.appendChild(quoteCard)
+        document.fonts.ready.then(function () {
+            // Now, call dom-to-image to capture the HTML element
+            // if(quoteData.published!==1 && !quoteData.quote_ans){
+            //     // captureAndSaveAsJPG(quoteCard, `quote${quoteData.id}.jpg`)
+            //     console.log('Created')
+            // }
+            if([142,85,127].includes(quoteData.id)){
+                // captureAndSaveAsJPG(quoteCard, `quote${quoteData.id}.jpg`)
+                console.log('Fixed')
+            }
+        });
+    }
+
+    // Read the JSON file
+    let { data } = escriturrasObj
+    for (let i = 0; i < 148 && i < data.length; i++) {
+        if([142,85,127].includes(i+1)){
+            console.log('Fixed')
+            createEscriturraHTML(data[i])
+            }
+            // [60,116,141]
+            // [142,85,127,69]
+    }
+</script>
+</html>

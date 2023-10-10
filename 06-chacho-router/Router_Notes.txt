@@ -1,0 +1,46 @@
+07- React router
+SPA.
+Navegar entre páginas
+crear componente Link, 
+Crear componente Router
+Soportar ruta 404.
+Soportar rutas con parámetros
+Lazy Loading.
+
+Cómo funciona un React Router desde Cero.
+---------------------------------------------------
+INSTALAR LINETR
+
+1. pnpm install standard -D
+2. Entrar al pkage Json y al final, después de las dev Dependencies. añadir
+
+"eslintConfig": {
+	"extends": ["./node_modules/standard/eslintrc.json"]
+}
+----------------------------------------------
+SIMPLE CSS
+https://github.com/kevquirk/simple.css/wiki/Getting-Started-With-Simple.css
+
+<!-- Minified version Simple CSS-->
+<link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+
+--------------------------------------------------------------------------
+SPA: Single Page Application
+
+1. Versión usando Vanilla JS; tomando el atributo window.location.pathname y haciendo un renderizado condicional.
+-------------------------------
+import { useState } from 'react'
+
+function App () {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  return (
+    <main>
+      {currentPath === '/' && <HomePage />}
+      {currentPath === '/about' && <AboutPage />}
+    </main>
+  )
+}
+
+-NECESITAMOS UN useState que nos guarde el current PATH.
+
+ 

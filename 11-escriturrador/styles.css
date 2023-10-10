@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'Initial';
+    /* Your chosen font name */
+    src: url('./Fonts/MedievalInitialOneRegular.ttf') format('truetype');
+    /* Path to your font file */
+}
+
+@font-face {
+    font-family: 'Content';
+    /* Your chosen font name */
+    src: url('./Fonts/SketchGothicSchool.ttf') format('truetype');
+    /* Path to your font file */
+}
+
+:root {
+    --width: 1080px;
+    --min-height: 566px;
+    --quote-color: darkred;
+    --quote-font-size: 100px;
+    --context-font-size: 60px;
+    --initial-font-size: 340px;
+    --author-font-size: 120px;
+  }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+.card {
+    width: var(--width);
+    min-height: var(--min-height);
+    height: auto;
+    /* background-color: #f2eecb; */
+    background: radial-gradient(ellipse at center, #f2eecb 0%, #e6e1b6da 60%, #8f8958b6 100%);
+    padding: 0px 25px 20px 20px;
+}
+
+
+.initial{
+    font-family: 'Initial';
+    font-size: var(--initial-font-size);
+    margin: 0;
+    padding: 0;
+    color: var(--quote-color);
+}
+
+.quote{
+    font-family: 'Content';
+    font-size:var(--quote-font-size);
+    margin: 0;
+    font-weight: 500;
+    padding-top: 0.8rem;
+    color: var(--quote-color);
+}
+
+.container{
+    display:flex;
+}
+
+.author{
+    font-family: 'Content';
+    font-weight: 500;
+    font-size:var(--author-font-size);
+    color: black;
+    position: relative;
+    bottom:20px;
+}
+
+.context{
+    font-family: 'Content';
+    font-weight: 400;
+    font-size: var(--context-font-size);
+    color: rgba(0.5, 0.5,0.5, 0.6);
+    position: relative;
+    bottom:20px;
+}
+
+.excess{
+    font-family: 'Content';
+    font-size:var(--quote-font-size);
+    margin: 0;
+    font-weight: 500;
+    color: var(--quote-color);
+    position: relative;
+    bottom:80px;
+    padding-left: 10px;
+}

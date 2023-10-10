@@ -1,7 +1,7 @@
 import QuoteCard from './QuoteCard'
 import { useState, useEffect } from 'react'
 
-function RandomQuote () {
+function RandomQuote ({ isFirstLoad }) {
   const baseQuote = {
     quote: 'Cargando',
     author: 'Cargando'
@@ -23,21 +23,23 @@ function RandomQuote () {
         setRandomQuote(quote.data)
       })
       .catch(error => console.log(error))
-      .finally(
-      )
   }, [loading])
 
   function handleClick () {
     console.log('CLICK')
     setIsLoading(!loading)
     setRandomQuote(baseQuote)
+    isFirstLoad.current = false
+    console.log(isFirstLoad)
   }
 
   return (
     <>
       {/* QuoteCard */}
       <div>
-        <QuoteCard quote={quote} />
+        <br />
+        {isFirstLoad.current && <h4>Bienvenido a las Escriturras</h4>}
+        {!isFirstLoad.current && <QuoteCard quote={quote} />}
       </div>
       <br />
       <button onClick={handleClick} type='button' className='btn btn-outline-success'>Nueva Escriturra</button>

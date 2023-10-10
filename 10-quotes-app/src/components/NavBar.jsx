@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Routes, Route, Link } from 'react-router-dom'
 
 import AuthorsList from './AuthorsList'
@@ -10,21 +10,24 @@ import SearchResults from './SearchResults'
 
 function NavBar () {
   const [query, setQuery] = useState('')
+  const isFirstLoad = useRef(true)
 
   console.log('Render')
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const { query } = Object.fromEntries(new window.FormData(event.target))
-    console.log(`Query submited: ${query}`)
-    setQuery(query)
-  }
-
-  const handleChange = (event) => {
-    const newQuery = event.target.value
-    setQuery(newQuery)
+    const fields = new FormData(event.target)
+    const searchQuery = fields.get('searchQuery')
+    console.log(`Query submited: ${searchQuery}`)
+    setQuery(searchQuery)
     console.log(query)
   }
+
+  // const handleChange = (event) => {
+  //   const newQuery = event.target.value
+  //   setQuery(newQuery)
+  //   console.log(newQuery)
+  // }
 
   const clearQuery = () => {
     setQuery('')
@@ -32,8 +35,8 @@ function NavBar () {
 
   const handleLinkClick = () => {
     const navBar = document.querySelector('.navbar-collapse')
-    navBar.classList.remove('show')
     clearQuery()
+    navBar.classList.remove('show')
   }
 
   const handleSearch = () => {
@@ -76,7 +79,7 @@ function NavBar () {
                 </li>
               </ul>
               <form onSubmit={handleSubmit} className='d-flex' role='search'>
-                <input onChange={handleChange} value={query} name='query' className='form-control me-2' type='search' placeholder='Buscar frase' aria-label='Search' />
+                <input /* onChange={handleChange} value={query} */ name='searchQuery' className='form-control me-2' type='search' placeholder='Buscar frase' aria-label='Search' />
                 <button onClick={handleSearch} className='btn btn-outline-success' type='submit'>Buscar</button>
               </form>
             </div>
@@ -87,7 +90,7 @@ function NavBar () {
         <br />
         <div className='container'>
           <Routes>
-            {query === '' && <Route path='/' element={<RandomQuote />} />}
+            {query === '' && <Route path='/' element={<RandomQuote isFirstLoad={isFirstLoad} />} />}
             {query !== '' && <Route path='/' element={<SearchResults query={query} />} />}
             {query === '' && <Route path='/quotes' element={<QuotesList />} />}
             {query !== '' && <Route path='/quotes' element={<SearchResults query={query} />} />}

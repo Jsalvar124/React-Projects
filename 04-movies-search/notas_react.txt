@@ -169,3 +169,16 @@ export function useMovies ({ query }) {
       setMoviesResults(noResults.Search)
     }
   }
+
+  --------------------------------------
+  useMemo
+  MEMOIZA un valor, para no renderizar nuevamente
+
+    const sortedMovies = useMemo(() => { //PARA VALORES
+    console.log('RENDER')
+    return sorted
+      ? [...mappedMovies].sort((a, b) => a.title.localeCompare(b.title))
+      : mappedMovies
+  }, [movies, sorted])
+
+  USE CALLBACK ES COMO EL USE MEMO PERO PARA FUNCIONES.

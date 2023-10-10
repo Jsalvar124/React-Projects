@@ -1,5 +1,6 @@
 import QuoteCard from './QuoteCard'
 import { useState, useEffect } from 'react'
+// import debounce from 'just-debounce-it'
 
 function SearchResults ({ query }) {
   function useGetQuotes () {
@@ -14,7 +15,7 @@ function SearchResults ({ query }) {
         })
         .then(quotes => {
           console.log(quotes.data)
-          console.log('RENDER')
+          console.log('fetch', query)
           setSearchResults(quotes.data)
         })
         .catch(error => console.log(error))
@@ -22,7 +23,7 @@ function SearchResults ({ query }) {
 
     return { quotes }
   }
-  // Custo Hook
+  // Use the Custom Hook
   const { quotes } = useGetQuotes()
 
   return (

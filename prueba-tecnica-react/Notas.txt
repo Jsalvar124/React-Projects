@@ -1,0 +1,84 @@
+El main, es el primer archivo que carga, para renderizar nuestra app. 
+
+Leer del local storage, es muy lento, hay que tener cuidado con ponerlo en el cuerpo, porque podría hacerse cada vez que se renderiza, idealmente, solo una vez. cuando se monta el componente.
+Hooks
+UseEffect nos permite ejectutar código arbitrario cuando el componente se carga en el DOM, y cada vez que las dependencias sufren algun cambio.
+const Component = () =>{
+
+const [value, setValue] = useState(null)
+
+useEffect(() =>{
+//codigo que se usa cada vez que se renderiza el componente.
+
+},[Array de dependencias])
+
+El array es opcional, hace que el código se ejecute cada vez que se detecta un cambio en alguna de las dependencias.
+El código del use effect se ejecuta, AL MENOS, una vez. 
+
+Si sólo se quiere ejecutar código UNA VEZ, cuando se renderiza por primera vez el componente, se pone el array de dependencias vacio
+
+Si queremos que se ejecute, cada vez que se renderiza, se pone el array vacio.  
+
+LINTERN
+
+standard.js es un estandar de reglas, para que el código quede guapo. un conjunto de reglas.
+como se debe limitar y formatear el código.
+
+1. en la raiz del proyecto, instalar standard como dependencia de desarrollo hacer un 
+
+npm install standard -D
+
+2. añadir esto al final del package.json
+
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
+  }
+
+3. SE DEBE TENER LA EXTENSION DE ESLint instalada.
+
+CREAR UN PROYECTO
+
+1. npm create vite@latest
+
+-name
+-react
+-javascript+swc
+
+entrar a la carpeta creada, e instalar las dependencias.
+
+en un componente de React, no puedes añadir un addEventListener, 
+para controlar cuando se suscribe a un evento, usamos el UseEffect que
+no coincide con la renderización sino que se especifica.
+
+
+Custom hooks
+Es reutlizar lógica de nuestros componentes, en diferentes componentes.
+su forma es simplemente una función, con hooks, o lógica por dentro.
+NO PUEDE ESTAR DENTRO DE UN IF O UN WHILE
+Debe ser llamado dentro del cuerpo de nuestro componente
+El custom hook es una función normal, que nos permite utilizar todos los hooks de react.
+
+function useCustomHookName ({parametros}) {
+	const [imgUrl, setImgUrl] = useState()
+	
+	useEffect(()=>{
+	if (!fact) return //Si no hay ningún fact, pues no devuelve nada
+	const catApiUrl=`https://cataas.com/cat/says/${fact.split(" ", 3).join(" ")}`
+	fetch(catApiURL)
+		.then(res => res.json())
+		.then(response => {
+		const {url} = response //desestructurar del response, la key url
+		setImageUrl(url)		
+		})
+	}, [fact]) //cada vez que cambie el fact, se activa este custom hook y la logica dentro de el se corre.	
+
+}
+
+EVITAR EN LOS CUSTOM HOOKS; DARLE UN NOMBRE QUE DIGA CUAL ES LA IMPLEMENTACION QUE TIENE
+LO QUE HACEPOR DENTRO PUEDE CAMBIAR.
+
+
+
+
+
